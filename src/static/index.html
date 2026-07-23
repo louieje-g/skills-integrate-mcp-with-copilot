@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div id="auth-controls" class="auth-controls">
+      <button id="user-menu-button" class="user-menu-button" aria-label="Teacher account menu">
+        👤
+      </button>
+      <div id="auth-menu" class="auth-menu hidden">
+        <p id="auth-status" class="auth-status">Student view</p>
+        <button id="login-button" type="button">Teacher Login</button>
+        <button id="logout-button" type="button" class="hidden">Logout</button>
+      </div>
+    </div>
+
     <header>
       <h1>Mergington High School</h1>
       <h2>Extracurricular Activities</h2>
@@ -22,7 +33,8 @@
       </section>
 
       <section id="signup-container">
-        <h3>Sign Up for an Activity</h3>
+        <h3>Register Student (Teacher Only)</h3>
+        <p id="signup-hint" class="signup-hint">Please log in as a teacher to register or unregister students.</p>
         <form id="signup-form">
           <div class="form-group">
             <label for="email">Student Email:</label>
@@ -44,6 +56,26 @@
     <footer>
       <p>&copy; 2026 Mergington High School</p>
     </footer>
+
+    <div id="login-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="login-title">
+      <div class="modal-content">
+        <h3 id="login-title">Teacher Login</h3>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" required />
+          </div>
+          <div class="modal-actions">
+            <button type="submit">Login</button>
+            <button type="button" id="cancel-login">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <script src="app.js"></script>
   </body>

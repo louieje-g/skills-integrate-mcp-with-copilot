@@ -1,11 +1,13 @@
 # Mergington High School Activities API
 
-A super simple FastAPI application that allows students to view and sign up for extracurricular activities.
+A super simple FastAPI application that allows students to view extracurricular activities and teachers to manage registrations.
 
 ## Features
 
 - View all available extracurricular activities
-- Sign up for activities
+- Teacher login/logout for admin mode
+- Register students for activities (teacher only)
+- Unregister students from activities (teacher only)
 
 ## Getting Started
 
@@ -30,7 +32,11 @@ A super simple FastAPI application that allows students to view and sign up for 
 | Method | Endpoint                                                          | Description                                                         |
 | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
 | GET    | `/activities`                                                     | Get all activities with their details and current participant count |
-| POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
+| POST   | `/auth/login`                                                     | Teacher login (returns auth token)                                 |
+| POST   | `/auth/logout`                                                    | Teacher logout                                                      |
+| GET    | `/auth/status`                                                    | Check if current token is authenticated                             |
+| POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Register a student for an activity (teacher only)                  |
+| DELETE | `/activities/{activity_name}/unregister?email=student@mergington.edu` | Unregister a student from an activity (teacher only)           |
 
 ## Data Model
 
@@ -47,4 +53,17 @@ The application uses a simple data model with meaningful identifiers:
    - Name
    - Grade level
 
-All data is stored in memory, which means data will be reset when the server restarts.
+## Teacher Credentials
+
+Teacher usernames and passwords are stored in `teachers.json`.
+
+Example format:
+
+```json
+{
+   "teacher1": "mergington123",
+   "coach.smith": "soccer2026"
+}
+```
+
+All activity and auth session data is stored in memory, which means it will be reset when the server restarts.
